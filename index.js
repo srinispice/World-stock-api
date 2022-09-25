@@ -3,8 +3,14 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const currencyRoutes = require('./routes/currencies');
+const newsRoutes = require('./routes/news');
+
 const app = express();
 const finalJson = [];
+
+app.use(currencyRoutes);
+app.use(newsRoutes);
 
 app.get('/', (req, res) => {
     res.json('Welcome to Global Stocks API');
