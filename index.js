@@ -7,7 +7,7 @@ const currencyRoutes = require('./routes/currencies');
 const newsRoutes = require('./routes/news');
 
 const app = express();
-const finalJson = [];
+var finalJson = [];
 
 app.use(currencyRoutes);
 app.use(newsRoutes);

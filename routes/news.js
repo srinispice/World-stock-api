@@ -3,7 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const router = new express.Router();
 
-const finalJson = [];
+var finalJson = [];
 const pageUrl = 'https://www.investing.com';
 
 router.get('/news/latest_news', (req, response) => {

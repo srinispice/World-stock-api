@@ -3,7 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const router = new express.Router();
 
-const finalJson = [];
+var finalJson = [];
 
 router.get('/forex_rates/major_pairs_by_price', (req, response) => {
     axios.get('https://in.investing.com/currencies/streaming-forex-rates-majors')
