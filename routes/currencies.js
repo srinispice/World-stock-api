@@ -28,7 +28,7 @@ router.get('/forex_rates/major_pairs_by_price', (req, response) => {
             const getChgTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-chg span');
             const getChgPerTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-chg_pct span');
             const getTimeTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-time time');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], bid: getBidTagArr[i], ask: getAskTagArr[i], high: getHighTagArr[i], low: getLowTagArr[i], change: getChgTagArr[i], changePercentage: getChgPerTagArr[i], time: getTimeTagArr[i] });
             }
@@ -60,7 +60,7 @@ router.get('/forex_rates/major_pairs_by_performance', (req, response) => {
             const getOneMonthTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_month span');
             const getYearToDateTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_ytd span');
             const getOneYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_year span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], last: getLastTagArr[i], daily: getDailyTagArr[i], oneWeek: getOneWeekTagArr[i], oneMonth: getOneMonthTagArr[i], yearToDate: getYearToDateTagArr[i], oneYear: getOneYearTagArr[i] });
             }
@@ -92,7 +92,7 @@ router.get('/major_global_indices_by_technical', (req, response) => {
             const getDailyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_day span');
             const getWeeklyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_week span');
             const getMonthlyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_month span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({
                     name: getNameTagArr[i],

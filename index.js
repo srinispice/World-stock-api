@@ -16,6 +16,38 @@ app.get('/', (req, res) => {
     res.json('Welcome to Global Stocks API');
 });
 
+app.get('/countryList', (req, response) => {
+
+    axios.get(' https://in.investing.com/equities/trending-stocks')
+        .then((res) => {
+            const html = res.data;
+            const $ = cheerio.load(html);
+
+            const getTagDataArr = (tagName, attr = '') => {
+                const tempArr = [];
+                $(tagName).each((i, e) => {
+                    if ($(e).text()) {
+                        tempArr.push((attr) ? $(e).attr(attr) : $(e).text());
+                    }
+                });
+                return tempArr;
+            };
+            // const getNameTagArr = commonFunctions.getTagDataArr('.js-simple-country-selection-popup .common-list .common-list-item .text');
+            const getUrlTagArr = getTagDataArr('.js-simple-country-selection-popup .common-list .common-list-item .common-list-link', 'href');
+            console.log(getUrlTagArr);
+
+
+            // for (let i = 0; i < getNameTagArr.length; i++) {
+            //     finalJson.push({ name: getNameTagArr[i], last: getLastTagArr[i], high: getHighTagArr[i], low: getLowTagArr[i], change: getChgTagArr[i], changePercentage: getChgPerTagArr[i], volume: getVolTagArr[i], time: getTimeTagArr[i] });
+            // }
+            console.log(finalJson.length);
+            response.json(finalJson);
+        }).catch((err) => {
+            response.json({ error: 'Some error occurred' })
+        });
+
+});
+
 
 app.get('/major_global_indices_by_price', (req, response) => {
 
@@ -43,7 +75,7 @@ app.get('/major_global_indices_by_price', (req, response) => {
             const getTimeTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-time time');
 
 
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], last: getLastTagArr[i], high: getHighTagArr[i], low: getLowTagArr[i], change: getChgTagArr[i], changePercentage: getChgPerTagArr[i], volume: getVolTagArr[i], time: getTimeTagArr[i] });
             }
@@ -78,7 +110,7 @@ app.get('/major_global_indices_by_performance', (req, response) => {
             const getYearToDateTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_ytd span');
             const getOneYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_year span');
             const getThreeYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_3year span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], daily: getDailyTagArr[i], oneWeek: getOneWeekTagArr[i], oneMonth: getOneMonthTagArr[i], yearToDate: getYearToDateTagArr[i], oneYear: getOneYearTagArr[i], threeYear: getThreeYearTagArr[i] });
             }
@@ -111,7 +143,7 @@ app.get('/major_global_indices_by_technical', (req, response) => {
             const getDailyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_day span');
             const getWeeklyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_week span');
             const getMonthlyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_month span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({
                     name: getNameTagArr[i],
@@ -154,7 +186,7 @@ app.get('/global_indices_by_price', (req, response) => {
             const getTimeTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-time time');
 
 
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], last: getLastTagArr[i], high: getHighTagArr[i], low: getLowTagArr[i], change: getChgTagArr[i], changePercentage: getChgPerTagArr[i], volume: getVolTagArr[i], time: getTimeTagArr[i] });
             }
@@ -188,7 +220,7 @@ app.get('/global_indices_by_performance', (req, response) => {
             const getYearToDateTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_ytd span');
             const getOneYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_year span');
             const getThreeYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_3year span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], daily: getDailyTagArr[i], oneWeek: getOneWeekTagArr[i], oneMonth: getOneMonthTagArr[i], yearToDate: getYearToDateTagArr[i], oneYear: getOneYearTagArr[i], threeYear: getThreeYearTagArr[i] });
             }
@@ -220,7 +252,7 @@ app.get('/global_indices_by_technical', (req, response) => {
             const getDailyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_day span');
             const getWeeklyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_week span');
             const getMonthlyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_month span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({
                     name: getNameTagArr[i],
@@ -263,7 +295,7 @@ app.get('/major_commodity_by_price', (req, response) => {
             const getTimeTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-time time');
 
 
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], last: getLastTagArr[i], high: getHighTagArr[i], low: getLowTagArr[i], change: getChgTagArr[i], changePercentage: getChgPerTagArr[i], volume: getVolTagArr[i], time: getTimeTagArr[i] });
             }
@@ -297,7 +329,7 @@ app.get('/major_commodity_by_performance', (req, response) => {
             const getYearToDateTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_ytd span');
             const getOneYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_year span');
             const getThreeYearTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-performance_3year span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ name: getNameTagArr[i], daily: getDailyTagArr[i], oneWeek: getOneWeekTagArr[i], oneMonth: getOneMonthTagArr[i], yearToDate: getYearToDateTagArr[i], oneYear: getOneYearTagArr[i], threeYear: getThreeYearTagArr[i] });
             }
@@ -329,7 +361,7 @@ app.get('/major_commodity_by_technical', (req, response) => {
             const getDailyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_day span');
             const getWeeklyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_week span');
             const getMonthlyTagArr = getTagDataArr('.js-section-content .js-table-wrapper .common-table-wrapper .common-table-scroller table tbody tr .col-technical_month span');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({
                     name: getNameTagArr[i],

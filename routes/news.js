@@ -26,7 +26,7 @@ router.get('/news/latest_news', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
@@ -56,7 +56,7 @@ router.get('/news/most_popular_news', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
@@ -88,10 +88,11 @@ router.get('/news/cryptocurrency_news/:pageNo?', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
+            console.log(finalJson.length);
             response.json(finalJson);
         }).catch((err) => {
             response.json({ error: 'Some error occurred' })
@@ -120,10 +121,11 @@ router.get('/news/stock_market_news/:pageNo?', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
+            console.log(finalJson.length);
             response.json(finalJson);
         }).catch((err) => {
             response.json({ error: 'Some error occurred' })
@@ -152,7 +154,7 @@ router.get('/news/commodities_news/:pageNo?', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
@@ -184,7 +186,7 @@ router.get('/news/forex_news/:pageNo?', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
@@ -216,7 +218,7 @@ router.get('/news/economy_news/:pageNo?', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
@@ -248,7 +250,7 @@ router.get('/news/economy_indicators_news/:pageNo?', (req, response) => {
             const getPostedByTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(1)');
             const getPostedDateTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv .articleDetails span:nth-child(2)');
             const getDescTagArr = getTagDataArr('#leftColumn .largeTitle article .textDiv p');
-
+            finalJson = [];
             for (let i = 0; i < getNameTagArr.length; i++) {
                 finalJson.push({ newsTitle: getNameTagArr[i], newsUrl: pageUrl + getHrefTagArr[i], postedBy: getPostedByTagArr[i], postedOn: getPostedDateTagArr[i], shotDesc: getDescTagArr[i] });
             }
