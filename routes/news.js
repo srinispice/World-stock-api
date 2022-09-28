@@ -2,16 +2,13 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const router = new express.Router();
-
 var finalJson = [];
 const pageUrl = 'https://www.investing.com';
-
 router.get('/news/latest_news', (req, response) => {
     axios.get('https://www.investing.com/news/latest-news')
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -35,13 +32,11 @@ router.get('/news/latest_news', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/most_popular_news', (req, response) => {
     axios.get('https://www.investing.com/news/most-popular-news')
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -65,7 +60,6 @@ router.get('/news/most_popular_news', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/cryptocurrency_news/:pageNo?', (req, response) => {
     const pageNo = (req.params.pageNo) ? req.params.pageNo : '';
     console.log('pageno', pageNo);
@@ -73,7 +67,6 @@ router.get('/news/cryptocurrency_news/:pageNo?', (req, response) => {
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -98,7 +91,6 @@ router.get('/news/cryptocurrency_news/:pageNo?', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/stock_market_news/:pageNo?', (req, response) => {
     const pageNo = (req.params.pageNo) ? req.params.pageNo : '';
     console.log('pageno', pageNo);
@@ -106,7 +98,6 @@ router.get('/news/stock_market_news/:pageNo?', (req, response) => {
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -131,7 +122,6 @@ router.get('/news/stock_market_news/:pageNo?', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/commodities_news/:pageNo?', (req, response) => {
     const pageNo = (req.params.pageNo) ? req.params.pageNo : '';
     console.log('pageno', pageNo);
@@ -139,7 +129,6 @@ router.get('/news/commodities_news/:pageNo?', (req, response) => {
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -163,7 +152,6 @@ router.get('/news/commodities_news/:pageNo?', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/forex_news/:pageNo?', (req, response) => {
     const pageNo = (req.params.pageNo) ? req.params.pageNo : '';
     console.log('pageno', pageNo);
@@ -171,7 +159,6 @@ router.get('/news/forex_news/:pageNo?', (req, response) => {
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -195,7 +182,6 @@ router.get('/news/forex_news/:pageNo?', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/economy_news/:pageNo?', (req, response) => {
     const pageNo = (req.params.pageNo) ? req.params.pageNo : '';
     console.log('pageno', pageNo);
@@ -203,7 +189,6 @@ router.get('/news/economy_news/:pageNo?', (req, response) => {
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -227,7 +212,6 @@ router.get('/news/economy_news/:pageNo?', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/news/economy_indicators_news/:pageNo?', (req, response) => {
     const pageNo = (req.params.pageNo) ? req.params.pageNo : '';
     console.log('pageno', pageNo);
@@ -235,7 +219,6 @@ router.get('/news/economy_indicators_news/:pageNo?', (req, response) => {
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName, attr = '') => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -259,5 +242,4 @@ router.get('/news/economy_indicators_news/:pageNo?', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 module.exports = router;

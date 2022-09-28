@@ -2,15 +2,12 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const router = new express.Router();
-
 var finalJson = [];
-
 router.get('/forex_rates/major_pairs_by_price', (req, response) => {
     axios.get('https://in.investing.com/currencies/streaming-forex-rates-majors')
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName) => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -37,13 +34,11 @@ router.get('/forex_rates/major_pairs_by_price', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/forex_rates/major_pairs_by_performance', (req, response) => {
     axios.get('https://in.investing.com/currencies/streaming-forex-rates-majors/performance')
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName) => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -69,14 +64,11 @@ router.get('/forex_rates/major_pairs_by_performance', (req, response) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
 router.get('/major_global_indices_by_technical', (req, response) => {
-
     axios.get('https://in.investing.com/currencies/streaming-forex-rates-majors/technical')
         .then((res) => {
             const html = res.data;
             const $ = cheerio.load(html);
-
             const getTagDataArr = (tagName) => {
                 const tempArr = [];
                 $(tagName).each((i, e) => {
@@ -103,13 +95,9 @@ router.get('/major_global_indices_by_technical', (req, response) => {
                     monthly: getMonthlyTagArr[i],
                 });
             }
-
             response.json(finalJson);
         }).catch((err) => {
             response.json({ error: 'Some error occurred' })
         });
 });
-
-
-
 module.exports = router;
